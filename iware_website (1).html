@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iware Spots & IP Ventures</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #222;
+    }
+    header {
+      background-color: #000;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-style: italic;
+    }
+    nav {
+      background-color: #222;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 15px 20px;
+      display: block;
+      transition: background 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #444;
+    }
+    section {
+      padding: 50px 20px;
+      max-width: 1000px;
+      margin: auto;
+      background-color: white;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .cta, button {
+      background-color: #0057e7;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .cta:hover, button:hover {
+      background-color: #0041b3;
+    }
+    .pricing-table {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    .plan {
+      border: 1px solid #ccc;
+      padding: 20px;
+      width: 30%;
+      min-width: 250px;
+      border-radius: 8px;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+    form input, form textarea, form select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background-color: #000;
+      color: white;
+    }
+    .dashboard, .investor-content {
+      display: none;
+    }
+    .visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Iware Spots & IP Ventures</h1>
+    <p>"Impossible into Idea Made Possible"</p>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#blog">Blog</a>
+    <a href="#login">Login</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#investors">Investor Portal</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="home">
+    <h2>Welcome</h2>
+    <p>We help innovators and investors bring world-changing IP to life.</p>
+    <a href="#pricing" class="cta">View Plans</a>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <ul>
+      <li>IP Ideation to Patent</li>
+      <li>Industrial Product Design</li>
+      <li>Investor Matchmaking</li>
+    </ul>
+  </section>
+
+  <section id="pricing">
+    <h2>Subscription Plans</h2>
+    <div class="pricing-table">
+      <div class="plan">
+        <h3>Starter</h3>
+        <p>$49/mo</p>
+        <button onclick="subscribe('starter')">Choose Plan</button>
+      </div>
+      <div class="plan">
+        <h3>Pro</h3>
+        <p>$149/mo</p>
+        <button onclick="subscribe('pro')">Choose Plan</button>
+      </div>
+      <div class="plan">
+        <h3>Venture Partner</h3>
+        <p>$499/mo</p>
+        <button onclick="subscribe('partner')">Choose Plan</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="blog">
+    <h2>Blog</h2>
+    <p>Discover how we scale impossible ideas into real ventures. More posts coming soon.</p>
+  </section>
+
+  <section id="login">
+    <h2>Login</h2>
+    <form onsubmit="handleLogin(event)">
+      <input type="email" placeholder="Email" required />
+      <input type="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+  </section>
+
+  <section id="dashboard" class="dashboard">
+    <h2>User Dashboard</h2>
+    <p>Welcome to your dashboard. Here you can track your projects and manage subscriptions.</p>
+  </section>
+
+  <section id="investors" class="investor-content">
+    <h2>Investor Portal</h2>
+    <p>Exclusive updates, deal flow, and gated IP assets. <a href="#">Request access</a>.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form id="contact-form">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+    <p><strong>Address:</strong> 955 Eldert Lane, Brooklyn, NY 11208-5134</p>
+    <p><strong>Phone:</strong> <a href="tel:+13475179747">347-517-9747</a></p>
+    <p><strong>Email:</strong> <a href="mailto:contact@iwarespots.com">contact@iwarespots.com</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Iware Spots & IP Ventures</p>
+  </footer>
+
+  <script>
+    function subscribe(plan) {
+      const links = {
+        starter: "https://buy.stripe.com/test_7sI7uK1yF5FVc8EaEH",
+        pro: "https://buy.stripe.com/test_cN26p06cT5FVg6I7sE",
+        partner: "https://buy.stripe.com/test_28o3dC4VX0A9g4ccMR"
+      };
+      window.location.href = links[plan];
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      document.querySelector('.dashboard').classList.add('visible');
+      document.querySelector('.investor-content').classList.add('visible');
+      alert('Login simulated. Dashboard & investor portal unlocked.');
+    }
+
+    emailjs.init('YOUR_EMAILJS_USER_ID');
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+        .then(() => alert('Message sent!'), err => alert('Error sending message.'));
+    });
+  </script>
+</body>
+</html>
